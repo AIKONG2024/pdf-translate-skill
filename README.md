@@ -1,56 +1,76 @@
 # pdf-translate-skill
 
-Translate PDFs through an agent while preserving layout as much as the selected engine allows.
+Agent skill for translating PDFs while preserving layout as much as the selected engine allows.
 
-- Codex, Claude Code, and agents-compatible runtimes
-- Default engine: official `pdf2zh` CLI from PDFMathTranslate
-- Output: final translated PDF
+- Works with Codex, Claude Code, and agents-compatible runtimes
+- Uses the official `pdf2zh` CLI from PDFMathTranslate as the default engine
+- Produces a final translated PDF
 
 -그림위치-
 
-## What It Does
-
-| Task | Skill | Description | User key required | Docs |
-| --- | --- | --- | --- | --- |
-| PDF translation | `pdf-translate` | Translate text-based PDFs, preserve layout, normalize output, and run basic QA | Optional | [Guide](docs/features/pdf-translate.md) |
-
-## Dependency Disclosure
-
-This skill uses the official `pdf2zh` CLI from PDFMathTranslate as the default PDF layout translation engine.
-
-The skill orchestrates language confirmation, provider setup, privacy confirmation, output normalization, and QA. It does not vendor PDFMathTranslate, BabelDOC, models, wheels, or sample PDFs.
-
-Current official `pdf2zh` releases may install upstream runtime dependencies such as BabelDOC. The skill does not invoke the optional `--babeldoc` backend by default.
-
-## Ask Your Agent To Install
-
-Paste this into Codex or Claude Code:
-
-```text
-Read this repository's install guide and install the pdf-translate skill globally. After installation, verify the skill files and tell me the next command to translate a PDF.
-```
-
-## Direct Install
+## Install
 
 ```bash
-npx --yes skills add https://github.com/<owner>/pdf-translate-skill --all -g
+npx --yes skills add https://github.com/AIKONG2024/pdf-translate-skill --all -g
 ```
 
-For local testing from this repository:
+For local development from this repository:
 
 ```bash
 npx --yes skills add . --all -g
 ```
 
-Then ask:
+## Setup
+
+Install the PDF translation engine:
+
+```bash
+python -m pip install pdf2zh
+pdf2zh --help
+```
+
+If you use a paid or keyed provider, set only the environment variables for that provider.
+
+Common examples:
+
+| Provider | Environment variables |
+| --- | --- |
+| Google | None |
+| DeepL | `DEEPL_AUTH_KEY` |
+| OpenAI | `OPENAI_API_KEY`, optional `OPENAI_MODEL` |
+| Gemini | `GEMINI_API_KEY`, optional `GEMINI_MODEL` |
+| Ollama | `OLLAMA_HOST`, `OLLAMA_MODEL` |
+
+## Use
+
+Ask your agent:
 
 ```text
 Translate this PDF to French while preserving layout: /path/to/paper.pdf
 ```
 
-## More
+The agent should confirm the source and target language. Before using a cloud translation provider, it must ask whether you approve sending extracted PDF text to that provider.
 
-- [Install](docs/install.md)
-- [Setup](docs/setup.md)
-- [Security and secrets](docs/security-and-secrets.md)
-- [PDF translate guide](docs/features/pdf-translate.md)
+## Output
+
+```text
+outputs/pdf_translate/<run-id>/
+├── source/
+│   └── original.pdf
+├── translated-<target-lang>.pdf
+└── translation-summary.md
+```
+
+The final file to use is:
+
+```text
+translated-<target-lang>.pdf
+```
+
+## Notes
+
+- This skill does not vendor PDFMathTranslate, BabelDOC, models, wheels, or sample PDFs.
+- Current official `pdf2zh` releases may install upstream runtime dependencies such as BabelDOC.
+- This skill does not invoke the optional `--babeldoc` backend by default.
+- For scanned/image-only PDFs, run OCR first or expect limited results.
+- Detailed usage is in [docs/features/pdf-translate.md](docs/features/pdf-translate.md).
