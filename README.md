@@ -8,7 +8,7 @@ Agent skill for translating PDFs while preserving layout as much as the selected
 - Uses the official `pdf2zh` CLI from PDFMathTranslate as the default engine
 - Produces a final translated PDF
 
-<img width="305" height="385" alt="image" src="https://github.com/user-attachments/assets/c1cd0770-ae2a-4df3-8f76-679c9da0858b" /><img width="305" height="385" alt="image" src="https://github.com/user-attachments/assets/2f6f2b6e-4e0a-4096-ba81-1334f13d678a" />
+<img width="450" height="600" alt="image" src="https://github.com/user-attachments/assets/c1cd0770-ae2a-4df3-8f76-679c9da0858b" /><img width="450" height="600" alt="image" src="https://github.com/user-attachments/assets/2f6f2b6e-4e0a-4096-ba81-1334f13d678a" />
 
 ## Install
 
