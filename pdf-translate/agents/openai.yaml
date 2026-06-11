@@ -1,0 +1,4 @@
+display_name: PDF Translate
+short_description: Translate PDFs with layout preservation using pdf2zh.
+default_prompt: Translate this PDF while preserving layout and provide the final PDF.
+

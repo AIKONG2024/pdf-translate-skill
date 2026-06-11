@@ -1,0 +1,14 @@
+{
+  "name": "pdf-translate-skill",
+  "description": "Agent skill for translating text-based PDFs with layout preservation using the official pdf2zh CLI from PDFMathTranslate",
+  "version": "0.1.0",
+  "author": {
+    "name": "<owner>"
+  },
+  "homepage": "https://github.com/<owner>/pdf-translate-skill",
+  "repository": "https://github.com/<owner>/pdf-translate-skill",
+  "license": "MIT",
+  "skills": [
+    "./pdf-translate"
+  ]
+}
